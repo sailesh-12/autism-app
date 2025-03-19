@@ -1,0 +1,211 @@
+.dashboard {
+  width: 100%; /* Full width of main-content */
+  min-height: 100%; /* Ensure it fills available height */
+  padding: 20px;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align content to top */
+  position: relative;
+  overflow: hidden;
+}
+.dashboard-hud {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+  backdrop-filter: blur(5px);
+}
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 235, 59, 0.1); /* Slight yellow tint */
+  z-index: 0;
+}
+
+.dashboard-hud {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%; /* Responsive width */
+  backdrop-filter: blur(5px);
+  margin-left: 20px; /* Offset from Sidebar */
+}
+
+.avatar-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid #ffeb3b;
+  box-shadow: 0 0 20px rgba(255, 235, 59, 0.7);
+}
+
+.level-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  background: #ff5722;
+  padding: 8px 20px;
+  border-radius: 50px;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+.star-icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.mission-board {
+  margin: 20px 0;
+}
+
+.mission-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #e8f5e9;
+  border-radius: 20px;
+  margin: 10px 0;
+  border: 4px solid #4caf50;
+  background: linear-gradient(135deg, #c8e6c9, #ffffff);
+  transition: all 0.3s ease;
+}
+
+.mission-text {
+  font-size: 20px;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.complete-button {
+  background: #ffeb3b;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+}
+
+.completed-stamp {
+  font-size: 20px;
+  color: #ff5722;
+  font-weight: bold;
+  background: #fff3e0;
+  padding: 5px 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(255, 87, 34, 0.3);
+}
+
+.treasure-meter {
+  margin: 20px 0;
+}
+
+.meter-text {
+  font-size: 18px;
+  color: #0288d1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.meter-bar {
+  height: 30px;
+  background: #e0f7fa;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid #0288d1;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0288d1, #4dd0e1);
+  border-radius: 12px;
+  box-shadow: inset 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+.loot-preview {
+  text-align: center;
+  padding: 15px;
+  background: #fce4ec;
+  border-radius: 20px;
+  border: 4px dashed #f06292;
+  box-shadow: 0 0 15px rgba(240, 98, 146, 0.3);
+  margin: 20px 0;
+}
+
+.chest-icon {
+  font-size: 30px;
+  color: #f06292;
+  margin-bottom: 5px;
+}
+
+.loot-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d81b60;
+}
+
+.loot-points {
+  font-size: 16px;
+  color: #d81b60;
+}
+
+.quest-cheer {
+  text-align: center;
+  padding: 10px 20px;
+  background: #fff3e0;
+  border-radius: 15px;
+  margin: 15px 0;
+  font-size: 22px;
+  color: #ff9800;
+  text-shadow: 1px 1px 3px rgba(255, 152, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.2);
+}
+
+.streak-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: #e0f7fa;
+  border-radius: 15px;
+  border: 3px solid #4dd0e1;
+}
+
+.map-icon {
+  font-size: 20px;
+  color: #0288d1;
+  margin-right: 10px;
+}
+
+.streak-text {
+  font-size: 18px;
+  color: #0288d1;
+}

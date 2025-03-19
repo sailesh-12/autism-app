@@ -1,0 +1,63 @@
+.reward-store {
+    padding: 20px;
+    background: rgba(243, 229, 245, 0.9);
+    border-radius: 25px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+  }
+  
+  .store-title {
+    font-size: 24px;
+    color: #8e24aa;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .loot-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #f3e5f5, #ffffff);
+    border-radius: 20px;
+    margin: 10px 0;
+    border: 4px solid #ab47bc;
+    transition: all 0.3s ease;
+  }
+  
+  .loot-name {
+    font-size: 18px;
+    color: #6a1b9a;
+    font-weight: bold;
+  }
+  
+  .claim-button {
+    background: #ab47bc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(171, 71, 188, 0.5);
+  }
+  
+  .claim-button:hover {
+    background: #8e24aa;
+  }
+  
+  .locked-button {
+    background: #bdbdbd;
+    color: #424242;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: not-allowed;
+  }

@@ -1,0 +1,23 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: #f0f4f8;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: transparent;
+    transition: margin-left 0.3s ease; /* Smooth transition for toggle */
+  }
+  
+  .main-content.sidebar-open {
+    margin-left: 250px; /* Offset by Sidebar width when open */
+  }
+  
+  .main-content.sidebar-closed {
+    margin-left: 0; /* Full width when Sidebar is closed */
+  }

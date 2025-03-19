@@ -1,0 +1,31 @@
+.rewards-page, .missions-page, .quests-page {
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f5e9, #ffffff);
+    border-radius: 20px;
+    min-height: 80vh;
+  }
+  
+  .page-title {
+    font-size: 32px;
+    color: #0288d1;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(2, 136, 209, 0.3);
+  }
+  
+  .quest-details {
+    text-align: center;
+    padding: 20px;
+    background: #e0f7fa;
+    border-radius: 15px;
+    border: 3px solid #4dd0e1;
+  }
+  
+  .streak-text {
+    font-size: 24px;
+    color: #0288d1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
