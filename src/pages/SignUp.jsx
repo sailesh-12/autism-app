@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate
 import PixelArtCharacters from '../components/PixelArtCharacters';
 import './SignUp.css';
 
-const SignUp = () => {
+const SignUp = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -13,12 +13,10 @@ const SignUp = () => {
   
   const [showPopup, setShowPopup] = useState(false);
 
-  // Show popup when page loads
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 500); // Show popup after 500ms for better user experience
-    
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,8 +30,8 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here (e.g., API call to backend)
     console.log('Form submitted:', formData);
+    onLogin(); // Triggers handleLogin in App.jsx, which navigates to /dashboard
   };
 
   return (

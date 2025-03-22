@@ -1,170 +1,62 @@
+
+import './Dashboard.css'
 import React, { useState } from 'react';
-import './Dashboard.css';
-import { motion } from 'framer-motion';
-import { FaStar, FaCheckCircle, FaGem, FaMap } from 'react-icons/fa';
-import { useTasks } from '../Context/TaskContext.jsx';
+import { Bell, Menu } from 'lucide-react';
+import Sidebar from '../components/SideBar.jsx';
+import { useNavigate } from 'react-router-dom';
 
-const AvatarDisplay = ({ avatarImage, level }) => (
-  <motion.div
-    className="avatar-container"
-    initial={{ opacity: 0, y: -50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, ease: 'easeOut' }}
-  >
-    <motion.img
-      src={avatarImage}
-      alt="Hero"
-      className="avatar"
-      whileHover={{ scale: 1.1 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-    />
-    <motion.div
-      className="level-orb"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-    >
-      <FaStar className="star-icon" />
-      <span>Level {level}</span>
-    </motion.div>
-  </motion.div>
-);
+export default function DashBoard() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const navigate = useNavigate();
 
-const TaskList = ({ tasks, onComplete }) => (
-  <div className="mission-board">
-    {tasks.map((task, index) => (
-      <motion.div
-        key={task.id}
-        className="mission-card"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: index * 0.1, duration: 0.4, ease: 'easeOut' }}
-        whileHover={{ y: -5 }}
-      >
-        <span className="mission-text">{task.title}</span>
-        {!task.completed ? (
-          <motion.button
-            onClick={() => onComplete(task.id)}
-            className="complete-button"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <FaCheckCircle /> Finish!
-          </motion.button>
-        ) : (
-          <motion.span
-            className="completed-stamp"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-          >
-            Done!
-          </motion.span>
-        )}
-      </motion.div>
-    ))}
-  </div>
-);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-const ProgressBar = ({ currentPoints, maxPoints }) => {
-  const progress = (currentPoints / maxPoints) * 100;
   return (
-    <motion.div
-      className="treasure-meter"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.3, duration: 0.5 }}
-    >
-      <p className="meter-text">
-        <FaStar /> {currentPoints}/{maxPoints} Treasure Stars
-      </p>
-      <div className="meter-bar">
-        <motion.div
-          className="meter-fill"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 1, ease: 'easeInOut' }}
-        />
+    <div className="min-h-screen flex bg-indigo-50">
+      <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
+        <header className="bg-white shadow-md sticky top-0 z-10">
+          <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div className="flex items-center">
+              <button 
+                onClick={toggleSidebar} 
+                className="text-blue-900 p-1 rounded-full hover:bg-blue-100 md:hidden"
+              >
+                <Menu size={24} />
+              </button>
+              <h1 className="text-2xl font-bold text-blue-900 ml-3">My Dashboard</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <button className="text-blue-900 relative p-2 rounded-full hover:bg-blue-100">
+                <Bell size={22} />
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+              </button>
+              <div className="flex items-center bg-blue-100 px-3 py-2 rounded-full">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  JS
+                </div>
+                <span className="ml-2 font-medium text-blue-900">Jamie</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="container mx-auto p-6">
+          <h2 className="text-3xl font-semibold text-indigo-900 mb-6 animate-fadeIn">
+            Welcome to AutiPal!
+          </h2>
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl shadow-lg p-8 mb-6 animate-slideUp text-center">
+            <p className="text-2xl font-medium text-white">
+              "You are stronger than you think—every day is a new chance to shine!"
+            </p>
+          </div>
+          <div className="bg-white rounded-xl shadow-md p-6 animate-fadeIn">
+            <h3 className="text-xl font-bold text-indigo-800 mb-4">About AutiPal</h3>
+            <p className="text-gray-700">
+              AutiPal is your supportive companion designed to empower individuals on the autism spectrum.
+            </p>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
-};
-
-const RewardTeaser = ({ nextReward }) => (
-  <motion.div
-    className="loot-preview"
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
-    whileHover={{ scale: 1.05 }}
-  >
-    <FaGem className="chest-icon" />
-    <p className="loot-text">Next Loot: {nextReward.name}</p>
-    <p className="loot-points">{nextReward.pointsNeeded} stars away!</p>
-  </motion.div>
-);
-
-const MotivationMessage = () => {
-  const cheers = ["You’re a quest master!", "Adventure awaits you!", "You’re unstoppable!"];
-  const randomCheer = cheers[Math.floor(Math.random() * cheers.length)];
-  return (
-    <motion.div
-      className="quest-cheer"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.5, duration: 0.6, ease: 'easeOut' }}
-    >
-      <span>{randomCheer}</span>
-    </motion.div>
-  );
-};
-
-const HabitTracker = ({ habitData }) => (
-  <motion.div
-    className="streak-panel"
-    initial={{ opacity: 0, x: 50 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
-    whileHover={{ scale: 1.05 }}
-  >
-    <FaMap className="map-icon" />
-    <p className="streak-text">Quest Streak: {habitData.length} Days</p>
-  </motion.div>
-);
-
-const Dashboard = () => {
-  const [level, setLevel] = useState(1);
-  const { tasks, setTasks, points, addPoints } = useTasks();
-  const [habitData] = useState([new Date(), new Date(Date.now() - 86400000)]);
-
-  const handleComplete = (id) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: true } : task
-    ));
-    addPoints(10);
-    if (points + 10 >= 50) setLevel(level + 1);
-  };
-
-  const nextReward = { name: 'Magic Puzzle', pointsNeeded: 50 - points };
-
-  return (
-    <motion.div
-      className="dashboard"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-    >
-      <div className="dashboard-hud">
-        <AvatarDisplay avatarImage="https://picsum.photos/120" level={level} />
-        <MotivationMessage />
-        <ProgressBar currentPoints={points} maxPoints={50} />
-        <RewardTeaser nextReward={nextReward} />
-        <TaskList tasks={tasks} onComplete={handleComplete} />
-        <HabitTracker habitData={habitData} />
-      </div>
-    </motion.div>
-  );
-};
-
-export default Dashboard;
+}
