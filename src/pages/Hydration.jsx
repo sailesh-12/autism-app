@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Droplet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import waterReminder from '../assets/water-reminder.mp3'; // Correct import syntax
+
+// Define the sound file using the imported asset
+const waterReminderSound = new Audio(waterReminder);
 
 export default function HydrationTracker() {
   const [hydrationLevel, setHydrationLevel] = useState(0);
-  const [alarmInterval, setAlarmInterval] = useState(null);
+  const [alarmInterval, setAlarmInterval] = useState(null); // Interval in hours
   const [alarmActive, setAlarmActive] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     let intervalId;
     if (alarmActive && alarmInterval) {
-      const intervalMs = alarmInterval * 60 * 60 * 1000;
+      const intervalMs = alarmInterval * 60 * 60 ; // Convert hours to milliseconds
       intervalId = setInterval(() => {
-        alert("Time to drink water! Stay hydrated!");
+        // Play the sound
+        waterReminderSound.play().catch((error) => {
+          console.error('Error playing sound:', error);
+        });
+        console.log(`Reminder triggered after ${alarmInterval} hour(s)`);
       }, intervalMs);
     }
     return () => {
-      if (intervalId) clearInterval(intervalId);
+      if (intervalId) clearInterval(intervalId); // Cleanup interval on unmount or change
     };
   }, [alarmActive, alarmInterval]);
 
@@ -28,8 +36,11 @@ export default function HydrationTracker() {
     setAlarmActive(true);
   };
   const stopAlarm = () => {
+    waterReminderSound.pause();
+    waterReminderSound.currentTime = 0;
     setAlarmActive(false);
     setAlarmInterval(null);
+    console.log('Alarm stopped, active:', false, 'interval:', null);
   };
 
   return (
