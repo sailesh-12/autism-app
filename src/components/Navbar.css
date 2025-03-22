@@ -1,0 +1,151 @@
+.navbar {
+    background: #6ab7ff; /* Soft blue */
+    padding: 10px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .navbar-title {
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Comic Neue', cursive; /* Playful, kid-friendly font */
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .mobile-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-toggle:hover {
+    color: #ffd700; /* Gold hover */
+  }
+  
+  .navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Comic Neue', cursive;
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .nav-item.active {
+    background: #ffd700; /* Bright gold */
+    color: #6ab7ff;
+  }
+  
+  .nav-icon {
+    margin-right: 6px;
+    font-size: 18px;
+  }
+  
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .navbar-title {
+      font-size: 18px;
+    }
+  
+    .nav-item {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  
+    .nav-icon {
+      font-size: 16px;
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .mobile-toggle {
+      display: block;
+    }
+  
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      background: #6ab7ff;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+  
+    .navbar-links.open {
+      display: flex;
+    }
+  
+    .nav-item {
+      width: 100%;
+      justify-content: center;
+      margin: 8px 0;
+      padding: 10px;
+    }
+  }
+  
+  /* Small Mobile */
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 8px 15px;
+      height: 45px;
+    }
+  
+    .navbar-title {
+      font-size: 16px;
+    }
+  
+    .mobile-toggle {
+      font-size: 18px;
+    }
+  
+    .navbar-links {
+      top: 45px;
+      padding: 10px;
+    }
+  
+    .nav-item {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }

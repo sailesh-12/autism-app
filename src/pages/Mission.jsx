@@ -3,7 +3,7 @@ import TaskScheduler from '../components/TaskScheduler';
 import { motion } from 'framer-motion';
 import { FaTasks } from 'react-icons/fa';
 import './Global.css'; // Ensure this matches your existing CSS or update below
-
+import './Missions.css'
 const Mission = () => {
   const [missions, setMissions] = useState([]); // State to hold missions
 

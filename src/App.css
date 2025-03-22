@@ -1,23 +1,29 @@
 .app-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background: #f0f4f8;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #f0f7ff; /* Light, calming blue */
+}
+
+.main-content {
+  flex: 1;
+  padding: 60px 20px 20px;
+  overflow-y: auto;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
   .main-content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: transparent;
-    transition: margin-left 0.3s ease; /* Smooth transition for toggle */
+    padding: 55px 15px 15px;
   }
-  
-  .main-content.sidebar-open {
-    margin-left: 250px; /* Offset by Sidebar width when open */
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 50px 10px 10px;
   }
-  
-  .main-content.sidebar-closed {
-    margin-left: 0; /* Full width when Sidebar is closed */
-  }
+}

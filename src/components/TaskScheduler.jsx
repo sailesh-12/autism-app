@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,Component } from 'react';
 import './TaskScheduler.css';
 import { FaPlus } from 'react-icons/fa';
 import { motion } from 'framer-motion';

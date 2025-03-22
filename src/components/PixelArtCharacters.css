@@ -1,0 +1,24 @@
+.pixel-art-characters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  
+  .character {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+  }
+  
+  .character-1 {
+    background: url('/path-to-character-1.png'); /* Replace with actual image */
+  }
+  
+  .character-2 {
+    background: url('/path-to-character-2.png'); /* Replace with actual image */
+  }
+  
+  .character-3 {
+    background: url('/path-to-character-3.png'); /* Replace with actual image */
+  }

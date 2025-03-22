@@ -2,27 +2,27 @@ import React, { useState } from 'react';
 import './Dashboard.css';
 import { motion } from 'framer-motion';
 import { FaStar, FaCheckCircle, FaGem, FaMap } from 'react-icons/fa';
-import { useTasks } from '../Context/TaskContext';
-
-// Simple base64 placeholder image (a small blue circle)
-const fallbackAvatar = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIAAQMAAADOtka5AAAABlBMVEAAAAD///+l2Z/dAAAAAnRSTlMAAHaTzTgAAAA9SURBVHja7cEBDQAAAMKg9090DQYgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAvwGQAAGjP9lFAAAAAElFTkSuQmCC';
+import { useTasks } from '../Context/TaskContext.jsx';
 
 const AvatarDisplay = ({ avatarImage, level }) => (
   <motion.div
     className="avatar-container"
-    initial={{ y: -50, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, ease: 'easeOut' }}
   >
-    <img 
-      src={avatarImage} 
-      alt="Hero" 
-      className="avatar" 
-      onError={(e) => (e.target.src = fallbackAvatar)} // Fallback if image fails
+    <motion.img
+      src={avatarImage}
+      alt="Hero"
+      className="avatar"
+      whileHover={{ scale: 1.1 }}
+      transition={{ type: 'spring', stiffness: 300 }}
     />
     <motion.div
       className="level-orb"
-      whileHover={{ scale: 1.1, rotate: 10 }}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
     >
       <FaStar className="star-icon" />
       <span>Level {level}</span>
@@ -32,31 +32,32 @@ const AvatarDisplay = ({ avatarImage, level }) => (
 
 const TaskList = ({ tasks, onComplete }) => (
   <div className="mission-board">
-    {tasks.map(task => (
+    {tasks.map((task, index) => (
       <motion.div
         key={task.id}
         className="mission-card"
-        whileHover={{ y: -5, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)' }}
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300 }}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.1, duration: 0.4, ease: 'easeOut' }}
+        whileHover={{ y: -5 }}
       >
         <span className="mission-text">{task.title}</span>
         {!task.completed ? (
           <motion.button
             onClick={() => onComplete(task.id)}
             className="complete-button"
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1, backgroundColor: '#ffca28' }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           >
             <FaCheckCircle /> Finish!
           </motion.button>
         ) : (
           <motion.span
             className="completed-stamp"
-            initial={{ rotate: -20, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            transition={{ duration: 0.4 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
             Done!
           </motion.span>
@@ -69,7 +70,12 @@ const TaskList = ({ tasks, onComplete }) => (
 const ProgressBar = ({ currentPoints, maxPoints }) => {
   const progress = (currentPoints / maxPoints) * 100;
   return (
-    <div className="treasure-meter">
+    <motion.div
+      className="treasure-meter"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+    >
       <p className="meter-text">
         <FaStar /> {currentPoints}/{maxPoints} Treasure Stars
       </p>
@@ -81,15 +87,17 @@ const ProgressBar = ({ currentPoints, maxPoints }) => {
           transition={{ duration: 1, ease: 'easeInOut' }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const RewardTeaser = ({ nextReward }) => (
   <motion.div
     className="loot-preview"
-    whileHover={{ scale: 1.05, rotate: 2 }}
-    transition={{ type: 'spring', stiffness: 250 }}
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
+    whileHover={{ scale: 1.05 }}
   >
     <FaGem className="chest-icon" />
     <p className="loot-text">Next Loot: {nextReward.name}</p>
@@ -103,9 +111,9 @@ const MotivationMessage = () => {
   return (
     <motion.div
       className="quest-cheer"
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.5, duration: 0.6, ease: 'easeOut' }}
     >
       <span>{randomCheer}</span>
     </motion.div>
@@ -115,8 +123,10 @@ const MotivationMessage = () => {
 const HabitTracker = ({ habitData }) => (
   <motion.div
     className="streak-panel"
+    initial={{ opacity: 0, x: 50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
     whileHover={{ scale: 1.05 }}
-    transition={{ type: 'spring', stiffness: 200 }}
   >
     <FaMap className="map-icon" />
     <p className="streak-text">Quest Streak: {habitData.length} Days</p>
@@ -139,16 +149,21 @@ const Dashboard = () => {
   const nextReward = { name: 'Magic Puzzle', pointsNeeded: 50 - points };
 
   return (
-    <div className="dashboard">
+    <motion.div
+      className="dashboard"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+    >
       <div className="dashboard-hud">
-        <AvatarDisplay avatarImage="https://picsum.photos/120" level={level} /> {/* Alternative placeholder */}
+        <AvatarDisplay avatarImage="https://picsum.photos/120" level={level} />
         <MotivationMessage />
         <ProgressBar currentPoints={points} maxPoints={50} />
         <RewardTeaser nextReward={nextReward} />
         <TaskList tasks={tasks} onComplete={handleComplete} />
         <HabitTracker habitData={habitData} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
