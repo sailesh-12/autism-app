@@ -13,6 +13,9 @@ import MoodSounds from './pages/MoodSounds.jsx';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [points1, setPoints1] = useState(0);
+  const addPoints = (amount) => setPoints((prev) => prev + amount);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -35,7 +38,7 @@ function App() {
         />
         <Route 
           path="/daily-activity-reward" 
-          element={isAuthenticated ? <DailyActivityReward /> : <Navigate to="/signup" />} 
+          element={isAuthenticated ? <DailyActivityReward points={points} setPoints={setPoints} />: <Navigate to="/signup" />} 
         />
         <Route 
           path="/speech-enhancer" 
@@ -51,7 +54,7 @@ function App() {
         />
         <Route 
           path="/to-do-tasks" 
-          element={isAuthenticated ? <ToDoTasks /> : <Navigate to="/signup" />} 
+          element={isAuthenticated ? <ToDoTasks addPoints={addPoints} /> : <Navigate to="/signup" />} 
         />
         <Route 
           path="/pomodoro-timer" 

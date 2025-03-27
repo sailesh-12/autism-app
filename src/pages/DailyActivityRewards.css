@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400&display=swap');
+
+.font-caveat {
+  font-family: 'Caveat', cursive;
+}
+
+.animate-float {
+  animation: floatAnimal 5s linear infinite;
+}
+
+@keyframes floatAnimal {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(20px, 20px);
+    opacity: 0;
+  }
+}
+
+.notebook {
+  background-image: repeating-linear-gradient(#000000 0 1px, transparent 1px 20px);
+}
+
+.animate-pop-in {
+  animation: popIn 0.5s ease-in-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
